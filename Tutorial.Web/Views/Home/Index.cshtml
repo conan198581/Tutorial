@@ -1,0 +1,22 @@
+﻿@model Tutorial.Web.ViewModels.HomeIndexViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h1>学生列表</h1>
+    <ul>
+        @foreach (var item in Model.Students)
+        {
+            <li><a asp-action="Detail" asp-controller="Home" asp-route-id="@item.Id">@item.Name</a> (@item.Age)</li>
+        }
+    </ul>
+</body>
+</html>

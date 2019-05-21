@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Tutorial.Web.Models;
+using Tutorial.Web.Service;
 
 namespace Tutorial.Web
 {
@@ -15,6 +17,8 @@ namespace Tutorial.Web
         
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
+            services.AddScoped<IRepository<Student>, InMemoryService>();
             services.AddSingleton<IWelcomeService, WelcomeService>();
         }
 
@@ -26,10 +30,11 @@ namespace Tutorial.Web
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(async (context) =>
+            app.UseMvc(route =>
             {
-                await context.Response.WriteAsync(welcomeService.GetMessage());
+                route.MapRoute(name: "default", template: "{controller=home}/{action=index}/{id?}");
             });
+
         }
     }
 }
