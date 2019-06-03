@@ -5,8 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Tutorial.Web.Data;
 using Tutorial.Web.Models;
 using Tutorial.Web.Service;
 
@@ -14,11 +17,21 @@ namespace Tutorial.Web
 {
     public class Startup
     {
+        private IConfiguration Configuration;
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
         
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddScoped<IRepository<Student>, InMemoryService>();
+            services.AddDbContext<DataDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
+            //services.AddScoped<IRepository<Student>, InMemoryService>();
+            services.AddScoped<IRepository<Student>, EfCoreService>();
             services.AddSingleton<IWelcomeService, WelcomeService>();
         }
 

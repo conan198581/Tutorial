@@ -27,6 +27,15 @@ namespace Tutorial.Web.Service
         {
             return Students.FirstOrDefault(x => x.Id == id);
         }
+
+        public void Add(Student s)
+        {
+            var stulist = Students.ToList();
+            stulist.Add(s);
+            Students = stulist;
+            
+
+        }
         
 
     }

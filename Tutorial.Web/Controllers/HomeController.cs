@@ -45,6 +45,22 @@ namespace Tutorial.Web.Controllers
             return View(studentViewModel);
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult Create(Student s)
+        {
+
+            StudentRepository.Add(s);
+            return RedirectToAction("index");
+        }
+
+
         
     }
 }

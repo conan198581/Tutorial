@@ -1,0 +1,21 @@
+﻿@model Tutorial.Web.Models.Student
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    <form asp-action="create" asp-controller="home" method="post">
+        <input asp-for="FirstName" />
+        <input asp-for=" LastName" />
+        <input asp-for="Birthday" type="date"/>
+        <input type="submit" value="提交" />
+    </form>
+</body>
+</html>
