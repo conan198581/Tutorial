@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial.Web", "Tutorial.Web\Tutorial.Web.csproj", "{B69D4491-03F1-4662-94FA-EBB698B5D6DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tutorial.Web", "Tutorial.Web\Tutorial.Web.csproj", "{B69D4491-03F1-4662-94FA-EBB698B5D6DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tutorial.Web.Identity", "Tutorial.Web.Identity\Tutorial.Web.Identity.csproj", "{359C93EC-1CDB-4620-911D-5625EA0A23F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B69D4491-03F1-4662-94FA-EBB698B5D6DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B69D4491-03F1-4662-94FA-EBB698B5D6DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B69D4491-03F1-4662-94FA-EBB698B5D6DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{359C93EC-1CDB-4620-911D-5625EA0A23F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{359C93EC-1CDB-4620-911D-5625EA0A23F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{359C93EC-1CDB-4620-911D-5625EA0A23F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{359C93EC-1CDB-4620-911D-5625EA0A23F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

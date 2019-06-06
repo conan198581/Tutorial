@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <h1>layout welcome student list </h1>
+    <div>
+        @RenderBody()
+    </div>
+    <hr />
+    <div>
+        @RenderSection("StudentCreate", required: false)
+    </div>
+
+    <hr />
+    @await Component.InvokeAsync("Welcome")
+
+</body>
+</html>

@@ -10,58 +10,43 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Tutorial.Web.Data;
-using Tutorial.Web.Models;
-using Tutorial.Web.Service;
 
-namespace Tutorial.Web
+namespace Tutorial.Web.Identity
 {
     public class Startup
     {
-        private IConfiguration Configuration;
+        private readonly IConfiguration _configuration;
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
-        
+
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddAuthentication();
             services.AddMvc();
-            services.AddDbContext<DataDbContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-            });
-            //services.AddScoped<IRepository<Student>, InMemoryService>();
-            services.AddScoped<IRepository<Student>, EfCoreService>();
-            services.AddSingleton<IWelcomeService, WelcomeService>();
-            
-
-
 
             services.AddDbContext<IdentityDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Tutorial.Web"));
-                
+                options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"),b=>b.MigrationsAssembly("Tutorial.Web.Identity"));
             });
 
+            //注入identity常用的两个类 的对象
             services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<IdentityDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env,IWelcomeService welcomeService)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseAuthentication();
-            app.UseMvc(route =>
-            {
-                route.MapRoute(name: "default", template: "{controller=home}/{action=index}/{id?}");
-            });
 
+            app.UseAuthentication();
+            app.UseMvc(router =>
+            {
+                router.MapRoute(name: "default", template: "{controller=home}/{action=index}/{id?}");
+            });
         }
     }
 }

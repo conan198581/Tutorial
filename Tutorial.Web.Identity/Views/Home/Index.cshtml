@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        @if (SignInManager.IsSignedIn(User))
+        {
+        <form asp-action="Logout" asp-controller="Account" method="post" id="LogoutForm">
+            @User.Identity.Name <span>欢迎你</span> ，<a href='javascript:document.getElementById("LogoutForm").submit()'>退出登录</a>
+        </form>
+            
+            
+        }
+        else
+        {
+            <a asp-action="login" asp-controller="account">登录</a>
+            <a asp-action="register" asp-controller="account">注册</a>
+        }
+
+    </div>
+    <h1>Welcome</h1>
+</body>
+</html>

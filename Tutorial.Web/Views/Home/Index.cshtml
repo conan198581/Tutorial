@@ -1,25 +1,41 @@
-﻿@model Tutorial.Web.ViewModels.HomeIndexViewModel
+﻿@model HomeIndexViewModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 @{
-    Layout = null;
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "首页";
 }
 
-<!DOCTYPE html>
+@if (SignInManager.IsSignedIn(User))
+{
+    <h1>Welcome @User.Identity.Name </h1>
+    <form asp-action="logout" asp-controller="account" method="post" id="LogoutForm">
+        <a href='javascript:document.getElementById("LogoutForm").submit()'>退出登录</a>
+    </form>
+}
+else
+{
+    <a asp-action="Login" asp-controller="Account">登录</a>
+    <a asp-action="Register" asp-controller="Account">注册</a>
+}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <h1>学生列表</h1>
-    <ul>
-        @foreach (var item in Model.Students)
-        {
-            <li><a asp-action="Detail" asp-controller="Home" asp-route-id="@item.Id">@item.Name</a> (@item.Age)</li>
-        }
-    </ul>
+<h1>学生列表</h1>
+<ul>
+    @foreach (var item in Model.Students)
+    {
+        <li><a asp-action="Detail" asp-controller="Home" asp-route-id="@item.Id">@item.Name</a> (@item.Age)</li>
+    }
+</ul>
+
+
+@section StudentCreate{
     <duv>
         <a asp-action="create">添加一个学生</a>
     </duv>
-</body>
-</html>
+}
+
+<partial name="_StudentList" model="Model" />
+
+<h1>TagHelper的写法</h1>
+
+<vc:welcome></vc:welcome>

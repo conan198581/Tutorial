@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,13 +46,14 @@ namespace Tutorial.Web.Controllers
             return View(studentViewModel);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-
+        [Authorize]
         [HttpPost]
         public IActionResult Create(Student s)
         {
